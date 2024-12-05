@@ -3,7 +3,15 @@ import clipboardScript from "./scripts/clipboard.inline"
 import clipboardStyle from "./styles/clipboard.scss"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 
-const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
+// Body.tsx
+import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { GlobalSearch } from "./Search"
+import { Explorer } from "./Explorer" 
+import { Darkmode } from "./Darkmode"
+import { Graph } from "./Graph"
+import "./styles/publish.scss"
+
+const Body: QuartzComponent = ({ children, cfg }: QuartzComponentProps) => {
   return (
     <div id="quartz-body" className="theme-dark">
       <div className="published-container print has-navigation has-graph has-outline">
@@ -11,58 +19,49 @@ const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
           {/* Left Column */}
           <div className="site-body-left-column">
             <div className="site-body-left-column-inner">
-              <a className="site-body-left-column-site-logo" aria-label="Site logo">
-                <img aria-hidden="true" src="/logo.png" />
+              {/* Logo & Site Title */}
+              <a className="site-body-left-column-site-logo" aria-label="Logo">
+                <img src="/logo.png" alt="Site Logo" />
               </a>
-              <a className="site-body-left-column-site-name">Caixa Preta</a>
-              
-              {/* Theme Toggle */}
-              <div className="site-body-left-column-site-theme-toggle is-dark">
-                <span className="option mod-dark">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="svg-icon lucide-moon">
-                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                  </svg>
-                </span>
-                <div className="checkbox-container is-enabled"></div>
-                <span className="option mod-light">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="svg-icon lucide-sun">
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path>
-                    <path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path>
-                    <path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
-                  </svg>
-                </span>
-              </div>
+              <a className="site-body-left-column-site-name">
+                {cfg?.website?.title ?? "Caixa Preta"}
+              </a>
 
-              {/* Search */}
+              {/* Search Component */}
               <div className="search-view-outer">
-                <div className="search-view-container">
-                  <span className="published-search-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="svg-icon lucide-search">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <path d="m21 21-4.3-4.3"></path>
-                    </svg>
-                  </span>
-                  <input className="search-bar" type="text" placeholder="Search page or heading..." />
-                </div>
+                <GlobalSearch />
               </div>
 
-              {/* Navigation */}
+              {/* Theme Toggle */}
+              <Darkmode displayClass="site-body-left-column-site-theme-toggle" />
+
+              {/* Navigation/Explorer */}
               <div className="nav-view-outer">
-                <div className="nav-view"></div>
+                <div className="nav-view">
+                  <Explorer />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Center Column */}
+          {/* Main Content Area */}
           <div className="site-body-center-column">
+            <div className="site-header">
+              <div className="clickable-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </div>
+              <div className="site-header-text">{cfg?.website?.title ?? "Caixa Preta"}</div>
+            </div>
+            
             <div className="render-container">
               <div className="render-container-inner">
                 <div className="publish-renderer">
                   <div className="markdown-preview-view markdown-rendered">
-                    <div className="markdown-preview-sizer markdown-preview-section">
-                      {children}
-                    </div>
+                    {children}
                   </div>
                 </div>
               </div>
@@ -74,13 +73,36 @@ const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
             <div className="site-body-right-column-inner">
               {/* Graph View */}
               <div className="graph-view-outer">
+                <div className="list-item published-section-header">
+                  <span className="published-section-header-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="2" y1="12" x2="22" y2="12"/>
+                    </svg>
+                  </span>
+                  <span>Interactive graph</span>
+                </div>
                 <div className="graph-view-container">
-                  <div className="graph-view"></div>
+                  <Graph />
                 </div>
               </div>
-              {/* Outline */}
+
+              {/* Outline View */}
               <div className="outline-view-outer">
-                <div className="outline-view"></div>
+                <div className="list-item published-section-header">
+                  <span className="published-section-header-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="21" y1="10" x2="3" y2="10"/>
+                      <line x1="21" y1="6" x2="3" y2="6"/>
+                      <line x1="21" y1="14" x2="3" y2="14"/>
+                      <line x1="21" y1="18" x2="3" y2="18"/>
+                    </svg>
+                  </span>
+                  <span>On this page</span>
+                </div>
+                <div className="outline-view">
+                  {/* Outline content will be added */}
+                </div>
               </div>
             </div>
           </div>
@@ -89,9 +111,5 @@ const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
     </div>
   )
 }
-
-// Não vamos usar clipboard por enquanto
-// Body.afterDOMLoaded = clipboardScript
-// Body.css = clipboardStyle
 
 export default (() => Body) satisfies QuartzComponentConstructor
