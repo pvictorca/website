@@ -1,3 +1,64 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+.custom-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--background-primary);
+    color: var(--text-normal);
+  }
+  
+  .custom-sidebar-left {
+    width: 280px;
+    border-right: 1px solid var(--background-modifier-border);
+    background: var(--background-secondary);
+    padding: 1rem;
+    
+    &-inner {
+      position: sticky;
+      top: 0;
+    }
+  }
+  
+  .custom-main {
+    flex: 1;
+    padding: 2rem;
+    min-width: 0;
+    
+    .custom-content {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+  }
+  
+  .custom-sidebar-right {
+    width: 300px;
+    border-left: 1px solid var(--background-modifier-border);
+    background: var(--background-secondary);
+    padding: 1rem;
+  
+    &-inner {
+      position: sticky;
+      top: 0;
+    }
+  }
+  
+  .custom-site-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .custom-sidebar-right {
+      display: none;
+    }
+    
+    .custom-sidebar-left {
+      display: none;
+    }
+    
+    .custom-main {
+      padding: 1rem;
+    }
+  }
