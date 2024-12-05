@@ -1,28 +1,19 @@
 @use "../../styles/variables.scss" as *;
 
+// The main container for the explorer section
 .explorer {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
   &.desktop-only {
+    // Only display the explorer on desktop devices
     @media all and not ($mobile) {
       display: flex;
     }
   }
-  /*&:after {
-    pointer-events: none;
-    content: "";
-    width: 100%;
-    height: 50px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    background: linear-gradient(transparent 0px, var(--light));
-  }*/
 }
 
+// Styling for the explorer button
 button#explorer {
   background-color: transparent;
   border: none;
@@ -41,92 +32,91 @@ button#explorer {
 
   & .fold {
     margin-left: 0.5rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease; // Smooth folding/unfolding animation
     opacity: 0.8;
   }
 
   &.collapsed .fold {
-    transform: rotateZ(-90deg);
+    transform: rotate(-90deg); // Rotate the fold icon when collapsed
   }
 }
 
+// Container for folder sections
 .folder-outer {
   display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-in-out;
+  grid-template-rows: 0fr; // Initially closed
+  transition: grid-template-rows 0.3s ease-in-out; // Smooth transition when opening/closing
+
+  &.open {
+    grid-template-rows: 1fr; // Fully open
+  }
+
+  > ul {
+    overflow: hidden; // Hide content when closed
+  }
 }
 
-.folder-outer.open {
-  grid-template-rows: 1fr;
-}
-
-.folder-outer > ul {
-  overflow: hidden;
-}
-
+// Main content area for the explorer
 #explorer-content {
   list-style: none;
   overflow: hidden;
   overflow-y: auto;
   max-height: 100%;
-  transition:
-    max-height 0.35s ease,
-    visibility 0s linear 0s;
+  transition: max-height 0.35s ease, visibility 0s linear; // Smoothly change height and visibility
   margin-top: 0.5rem;
   visibility: visible;
 
   &.collapsed {
-    max-height: 0;
-    transition:
-      max-height 0.35s ease,
-      visibility 0s linear 0.35s;
-    visibility: hidden;
+    max-height: 0; // Collapse the content
+    transition: max-height 0.35s ease, visibility 0s linear 0.35s;
+    visibility: hidden; // Hide visibility after collapsing
   }
 
   & ul {
     list-style: none;
     margin: 0.08rem 0;
     padding: 0;
-    transition:
-      max-height 0.35s ease,
-      transform 0.35s ease,
-      opacity 0.2s ease;
+    transition: max-height 0.35s ease, transform 0.35s ease, opacity 0.2s ease; // Smooth animation for list changes
+
     & li > a {
       color: var(--dark);
       opacity: 0.75;
-      pointer-events: all;
+      pointer-events: all; // Ensure the links are clickable
     }
   }
+
   > #explorer-ul {
-    max-height: none;
+    max-height: none; // No height restriction for the main list
   }
 }
 
+// SVG icons configuration
 svg {
-  pointer-events: all;
+  pointer-events: all; // Allow interaction with the SVG
 
   & > polyline {
-    pointer-events: none;
+    pointer-events: none; // Disable interaction with polyline elements
   }
 }
 
+// Container for folder items
 .folder-container {
   flex-direction: row;
   display: flex;
   align-items: center;
-  user-select: none;
+  user-select: none; // Prevent text selection
 
   & div > a {
     color: var(--secondary);
     font-family: var(--headerFont);
     font-size: 0.95rem;
-    font-weight: $semiBoldWeight;
+    font-weight: var(--semiBoldWeight);
     line-height: 1.5rem;
     display: inline-block;
-  }
 
-  & div > a:hover {
-    color: var(--tertiary);
+    &:hover {
+      color: var(--tertiary); // Change color on hover for better UX
+    }
   }
 
   & div > button {
@@ -135,47 +125,44 @@ svg {
     border: none;
     text-align: left;
     cursor: pointer;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     font-family: var(--headerFont);
 
     & span {
       font-size: 0.95rem;
-      display: inline-block;
       color: var(--secondary);
-      font-weight: $semiBoldWeight;
-      margin: 0;
+      font-weight: var(--semiBoldWeight);
       line-height: 1.5rem;
-      pointer-events: none;
+      pointer-events: none; // Prevent span from being interactive
     }
   }
 }
 
+// Folder icon styling and animation
 .folder-icon {
   margin-right: 5px;
   color: var(--secondary);
   cursor: pointer;
-  transition: transform 0.3s ease;
-  backface-visibility: visible;
+  transition: transform 0.3s ease; // Smoothly rotate the folder icon
+
+  &:hover {
+    color: var(--tertiary); // Change color on hover for better UX
+  }
+
+  &.closed {
+    transform: rotate(-90deg); // Rotate when the folder is closed
+  }
 }
 
-li:has(> .folder-outer:not(.open)) > .folder-container > svg {
-  transform: rotate(-90deg);
-}
-
-.folder-icon:hover {
-  color: var(--tertiary);
-}
-
+// Remove background styling
 .no-background::after {
   background: none !important;
 }
 
+// End of explorer content to ensure proper layout
 #explorer-end {
-  // needs height so IntersectionObserver gets triggered
-  height: 4px;
-  // remove default margin from li
-  margin: 0;
+  height: 4px; // Minimal height to trigger IntersectionObserver
+  margin: 0; // Remove default margin
 }
