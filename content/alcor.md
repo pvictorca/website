@@ -1,6 +1,6 @@
 ### **1. O que é Meditação**
 
-Meditação é uma prática que envolve focar a mente, geralmente direcionando a atenção para dentro, com o objetivo de cultivar estados de relaxamento, clareza mental e autoconsciência. Pode ser realizada de diversas formas, incluindo posturas sentadas, deitadas ou até mesmo caminhando, e tem impactos profundos no sistema nervoso, melhorando o humor e promovendo o bem-estar geral. Além disso, a meditação abrange diferentes técnicas, cada uma voltada para objetivos específicos, adaptando-se a diversos perfis e necessidades.
+malando
 
 ### **1.2 Por que Meditação é Importante?**
 
