@@ -1,8 +1,4 @@
 // @ts-ignore
-import clipboardScript from "./scripts/clipboard.inline"
-import clipboardStyle from "./styles/clipboard.scss"
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
-
 // Body.tsx
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { GlobalSearch } from "./Search"
