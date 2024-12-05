@@ -1,60 +1,74 @@
-@use "./base.scss";
-
+// custom.scss
 .custom-layout {
     display: flex;
     min-height: 100vh;
-    width: 100%;
-    background: var(--background-primary);
-    color: var(--text-normal);
+    background: #1e1e1e;  // Fundo escuro
+    color: #ffffff;
   }
   
   .custom-sidebar-left {
     width: 280px;
-    border-right: 1px solid var(--background-modifier-border);
-    background: var(--background-secondary);
-    padding: 1rem;
+    flex-shrink: 0;
+    padding: 2rem;
+    background: #262626;  // Um pouco mais claro que o fundo
+    border-right: 1px solid #363636;
     
     &-inner {
       position: sticky;
       top: 0;
+      height: 100%;
     }
   }
   
   .custom-main {
     flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
     padding: 2rem;
-    min-width: 0;
     
     .custom-content {
-      max-width: 750px;
-      margin: 0 auto;
+      width: 100%;
     }
   }
   
   .custom-sidebar-right {
     width: 300px;
-    border-left: 1px solid var(--background-modifier-border);
-    background: var(--background-secondary);
-    padding: 1rem;
-  
+    flex-shrink: 0;
+    padding: 2rem;
+    background: #262626;
+    border-left: 1px solid #363636;
+    
     &-inner {
       position: sticky;
       top: 0;
+      height: 100%;
     }
   }
   
   .custom-site-title {
     font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #ffffff;
   }
   
+  .custom-nav {
+    margin-top: 2rem;
+  }
+  
+  // Responsividade
   @media (max-width: 768px) {
-    .custom-sidebar-right {
-      display: none;
+    .custom-layout {
+      flex-direction: column;
     }
     
     .custom-sidebar-left {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #363636;
+    }
+    
+    .custom-sidebar-right {
       display: none;
     }
     

@@ -1,4 +1,5 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import "./styles/custom.scss"
 
 const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
   return (
@@ -9,7 +10,7 @@ const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
           <div className="custom-sidebar-left-inner">
             <div className="custom-site-title">Seu Site</div>
             <nav className="custom-nav">
-              {/* Navigation virá aqui */}
+              {/* Navigation virá aqui depois */}
             </nav>
           </div>
         </aside>
@@ -24,7 +25,7 @@ const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
         {/* Right Sidebar */}
         <aside className="custom-sidebar-right">
           <div className="custom-sidebar-right-inner">
-            {/* Graph/Outline virão aqui */}
+            {/* Graph/Outline virão aqui depois */}
           </div>
         </aside>
       </div>
