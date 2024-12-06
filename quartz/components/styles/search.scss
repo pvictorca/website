@@ -8,10 +8,10 @@
   }
 
   & > .search-button {
-    background-color: var(--lightgray);
-    border: none;
-    border-radius: 4px;
-    font-family: inherit;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-family: Inter;
     font-size: inherit;
     height: 2rem;
     padding: 0;
@@ -26,6 +26,7 @@
     & > p {
       display: inline;
       padding: 0 1rem;
+      color: #ddd;
     }
 
     & svg {
@@ -53,6 +54,7 @@
     overflow-y: auto;
     display: none;
     backdrop-filter: blur(4px);
+    
 
     &.active {
       display: inline-block;
@@ -63,6 +65,7 @@
       margin-top: 12vh;
       margin-left: auto;
       margin-right: auto;
+  
 
       @media all and not ($desktop) {
         width: 90%;
@@ -71,7 +74,6 @@
       & > * {
         width: 100%;
         border-radius: 7px;
-        background: var(--light);
         box-shadow:
           0 14px 50px rgba(27, 33, 48, 0.12),
           0 10px 30px rgba(27, 33, 48, 0.16);
@@ -84,22 +86,24 @@
         font-family: var(--bodyFont);
         color: var(--dark);
         font-size: 1.1em;
-        border: 1px solid var(--lightgray);
+        border: 1px solid #444;
 
         &:focus {
           outline: none;
         }
+        
       }
 
       & > #search-layout {
         display: none;
         flex-direction: row;
-        border: 1px solid var(--lightgray);
+        border: 1px solid #444;
         flex: 0 0 100%;
         box-sizing: border-box;
 
         &.display-results {
           display: flex;
+          background-color: #000000;
         }
 
         &[data-preview] > #results-container {
@@ -114,7 +118,7 @@
 
             & > div {
               &:first-child {
-                border-right: 1px solid var(--lightgray);
+                border-right: transparent;
                 border-top-right-radius: unset;
                 border-bottom-right-radius: unset;
               }
@@ -145,18 +149,19 @@
         }
 
         & .highlight {
-          background: color-mix(in srgb, var(--tertiary) 60%, rgba(255, 255, 255, 0));
-          border-radius: 5px;
-          scroll-margin-top: 2rem;
-        }
+          background-color: transparent; // Remover fundo
+          color: inter; // Usar a cor do texto original
+          font-weight: bold; // Ou deixar o peso do texto padrão
+      }
+      
 
         & > #preview-container {
           display: block;
           overflow: hidden;
-          font-family: inherit;
-          color: var(--dark);
+          font-family: inter;
+          background-color: #1a1a1a;
           line-height: 1.5em;
-          font-weight: $normalWeight;
+          font-weight: 600;
           overflow-y: auto;
           padding: 0 2rem;
 
@@ -178,29 +183,31 @@
             padding: 1em;
             cursor: pointer;
             transition: background 0.2s ease;
-            border-bottom: 1px solid var(--lightgray);
+            border-bottom: transparent;
             width: 100%;
             display: block;
             box-sizing: border-box;
+            background-color: #000000;
 
             // normalize card props
-            font-family: inherit;
+            font-family: Inter;
             font-size: 100%;
             line-height: 1.15;
             margin: 0;
             text-transform: none;
             text-align: left;
             outline: none;
-            font-weight: inherit;
+            font-weight: inter;
 
             &:hover,
             &:focus,
             &.focus {
-              background: var(--lightgray);
+              background: #1a1a1a;
             }
 
             & > h3 {
               margin: 0;
+              color: #fff;
             }
 
             & > ul.tags {
@@ -210,20 +217,21 @@
 
             & > ul > li > p {
               border-radius: 8px;
-              background-color: var(--highlight);
+              background-color: #444;
               padding: 0.2rem 0.4rem;
               margin: 0 0.1rem;
               line-height: 1.4rem;
-              font-weight: $boldWeight;
-              color: var(--secondary);
+              font-weight: 700;
+              color: #ccc;
 
               &.match-tag {
-                color: var(--tertiary);
+                color:#ffcc00;
               }
             }
 
             & > p {
               margin-bottom: 0;
+              color: #ccc; // Subtexto em um cinza intermediário
             }
           }
         }

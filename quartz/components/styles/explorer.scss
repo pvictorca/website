@@ -4,45 +4,55 @@
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+  padding: 0 0.5rem;
+  
   &.desktop-only {
     @media all and not ($mobile) {
       display: flex;
     }
   }
-  /*&:after {
-    pointer-events: none;
-    content: "";
-    width: 100%;
-    height: 50px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    background: linear-gradient(transparent 0px, var(--light));
-  }*/
+
+  // Title styling - this is the new part
+  .page-title {
+    font-size: 1.75rem;
+    color: var(--dark);
+    opacity: 0.9;
+    margin: 0.5rem 0 1rem 0;
+    font-weight: 400;
+    text-decoration: none;
+  }
 }
 
+// Rest of your existing explorer.scss code
 button#explorer {
   background-color: transparent;
   border: none;
   text-align: left;
   cursor: pointer;
-  padding: 0;
+  padding: 0.2rem 0;
   color: var(--dark);
   display: flex;
   align-items: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 
   & h2 {
-    font-size: 1rem;
+    font-size: 0.875rem;
     display: inline-block;
     margin: 0;
+    font-weight: 500;
   }
 
   & .fold {
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-    opacity: 0.8;
+    margin-left: 0.3rem;
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+    width: 12px;
+    height: 12px;
   }
 
   &.collapsed .fold {
@@ -53,7 +63,7 @@ button#explorer {
 .folder-outer {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-in-out;
+  transition: grid-template-rows 0.2s ease-in-out;
 }
 
 .folder-outer.open {
@@ -69,44 +79,34 @@ button#explorer {
   overflow: hidden;
   overflow-y: auto;
   max-height: 100%;
-  transition:
-    max-height 0.35s ease,
-    visibility 0s linear 0s;
-  margin-top: 0.5rem;
+  transition: max-height 0.25s ease;
+  margin-top: 0.3rem;
   visibility: visible;
+  font-size: 0.875rem;
 
   &.collapsed {
     max-height: 0;
-    transition:
-      max-height 0.35s ease,
-      visibility 0s linear 0.35s;
     visibility: hidden;
   }
 
   & ul {
     list-style: none;
-    margin: 0.08rem 0;
+    margin: 0.05rem 0;
     padding: 0;
-    transition:
-      max-height 0.35s ease,
-      transform 0.35s ease,
-      opacity 0.2s ease;
-    & li > a {
-      color: var(--dark);
-      opacity: 0.75;
-      pointer-events: all;
-    }
-  }
-  > #explorer-ul {
-    max-height: none;
+    transition: all 0.2s ease;
   }
 }
 
-svg {
+#explorer-content ul li > a {
+  color: var(--dark);
+  opacity: 0.75;
   pointer-events: all;
-
-  & > polyline {
-    pointer-events: none;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
+    color: var(--secondary);
   }
 }
 
@@ -115,67 +115,81 @@ svg {
   display: flex;
   align-items: center;
   user-select: none;
+  padding: 0.1rem 0;
+}
 
-  & div > a {
+.folder-container div > a {
+  color: var(--dark);
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 0.8;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
     color: var(--secondary);
-    font-family: var(--headerFont);
-    font-size: 0.95rem;
-    font-weight: $semiBoldWeight;
-    line-height: 1.5rem;
-    display: inline-block;
-  }
-
-  & div > a:hover {
-    color: var(--tertiary);
-  }
-
-  & div > button {
-    color: var(--dark);
-    background-color: transparent;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    padding-left: 0;
-    padding-right: 0;
-    display: flex;
-    align-items: center;
-    font-family: var(--headerFont);
-
-    & span {
-      font-size: 0.95rem;
-      display: inline-block;
-      color: var(--secondary);
-      font-weight: $semiBoldWeight;
-      margin: 0;
-      line-height: 1.5rem;
-      pointer-events: none;
-    }
   }
 }
 
-.folder-icon {
-  margin-right: 5px;
-  color: var(--secondary);
+.folder-container div > button {
+  color: var(--dark);
+  background-color: transparent;
+  border: none;
+  text-align: left;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  backface-visibility: visible;
+  padding: 0.1rem 0;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.folder-container div > button span {
+  font-size: 0.875rem;
+  color: var(--dark);
+  font-weight: 400;
+  margin: 0;
+  pointer-events: none;
+}
+
+.folder-icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 0.3rem;
+  color: var(--dark);
+  opacity: 0.7;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 li:has(> .folder-outer:not(.open)) > .folder-container > svg {
   transform: rotate(-90deg);
 }
 
-.folder-icon:hover {
-  color: var(--tertiary);
-}
-
-.no-background::after {
-  background: none !important;
-}
-
 #explorer-end {
-  // needs height so IntersectionObserver gets triggered
   height: 4px;
-  // remove default margin from li
   margin: 0;
+}
+
+// Dark mode styles
+[data-theme="dark"] {
+  .explorer {
+    .page-title {
+      color: var(--light);
+      opacity: 0.8;
+    }
+  }
+  
+  .explorer button#explorer,
+  .explorer .folder-container div > a,
+  .explorer .folder-container div > button span,
+  .explorer #explorer-content ul li > a,
+  .explorer .folder-icon {
+    color: var(--light);
+  }
 }

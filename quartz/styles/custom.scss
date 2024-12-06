@@ -1,3 +1,54 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ebebec;
+  margin: 1rem 0;
+  font-size: 16px;
+
+  span {
+    color: #ebebec;
+    font-weight: 400;
+  }
+
+  #search-icon {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    color: #ebebec;
+    opacity: 0.7;
+    stroke-width: 2px;
+    margin-right: 4px;
+  }
+
+  // Hide the actual search input until clicked
+  input#search {
+    display: none;
+  }
+}
+
+// Style for when search is active (you'll need to add JavaScript to toggle this)
+.search-active {
+  input#search {
+    display: block;
+    background-color: #1e1e1e;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #ebebec;
+    width: 100%;
+    font-size: 14px;
+
+    &::placeholder {
+      color: rgba(235, 235, 236, 0.6);
+    }
+
+    &:focus {
+      outline: none;
+      background-color: #1e1e1e;
+    }
+  }
+}
